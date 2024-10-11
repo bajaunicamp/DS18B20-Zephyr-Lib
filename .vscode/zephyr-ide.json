@@ -10,7 +10,7 @@
           "relBoardSubDir": "/home/lucas/.zephyr_ide/external/zephyr/boards/others/stm32_min_dev",
           "name": "build/stm32_min_dev",
           "westBuildArgs": "",
-          "westBuildCMakeArgs": " -DCONFIG_NO_OPTIMIZATIONS=y",
+          "westBuildCMakeArgs": " -DCONFIG_SIZE_OPTIMIZATIONS=y ",
           "confFiles": {
             "config": [],
             "extraConfig": [],

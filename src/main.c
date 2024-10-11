@@ -1,34 +1,27 @@
-// Esse programa de expemplo printa "Hello World!" no LOG no momento em que o led pisca
+// Esse programa de expemplo printa "Hello World!" no LOG no momento em que o
+// led pisca
 
-#include "zephyr/device.h"
-#include "zephyr/sys/printk.h"
-#include <zephyr/logging/log.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
+#include <zephyr/logging/log.h>
+#include <zephyr/logging/log_ctrl.h>
+#include <zephyr/timing/timing.h>
+#include <float.h>
+#include "ds18b20.h"
 
 LOG_MODULE_REGISTER();
 
-const struct gpio_dt_spec *const led = &(const struct gpio_dt_spec)GPIO_DT_SPEC_GET(DT_NODELABEL(led0), gpios);
+int main() {
+  float temperatura;
+  log_panic();
+  while(1){
+    k_msleep(5);
+    temperatura = ds18b20_get_temperature();
 
-int main(){
-  LOG_INF("Inicializando");
-
-  if(!device_is_ready(led->port)){
-    LOG_ERR("Led não está funcinando");
-  }
-
-  gpio_pin_configure_dt(led, GPIO_OUTPUT_ACTIVE);
-  
-  while (true) {
-    printk("Led aceso\n");
-    gpio_pin_set_dt(led, 1);
-
-    // Além do LOG, temos o printk
-
-    k_msleep(1000);
-
-    printk("Led apagado\n");
-    gpio_pin_set_dt(led, 0);
-    k_msleep(1000);
+    if(temperatura == FLT_MIN){
+      LOG_ERR("Erro ao ler a temperatura do sensor");
+    } else {
+      LOG_INF("%f", temperatura);
+    }
   }
 }
