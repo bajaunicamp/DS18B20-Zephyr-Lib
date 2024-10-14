@@ -1,6 +1,5 @@
 #include "ds18b20.h"
 #include <zephyr/kernel.h>
-#include <stdlib.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/logging/log.h>
 #include <float.h>
@@ -15,13 +14,13 @@ static void delay_us(uint32_t tempo_microssegundos){
   uint32_t val = k_cycle_get_32();
   uint32_t current_time = val;
   uint32_t tempo_cyc = k_us_to_cyc_floor32(tempo_microssegundos);
-  while (abs(val - current_time) < tempo_cyc) {
+  while ((val - current_time) < tempo_cyc) {
     current_time = k_cycle_get_32();
   }
 }
 
 static uint8_t ds18b20_start(){
-    if(!device_is_ready(w1)){
+    if(!device_is_ready(w1->port)){
       LOG_ERR("O dispositivo não está pronto para ser usado.");
       return -1;
     }
