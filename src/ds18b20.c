@@ -1,5 +1,4 @@
 #include "ds18b20.h"
-#include <stdint.h>
 #include <zephyr/kernel.h>
 #include <stdlib.h>
 #include <zephyr/drivers/gpio.h>
