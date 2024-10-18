@@ -20,8 +20,6 @@ int main() {
 
     if(temperatura == FLT_MIN){
       LOG_ERR("Erro ao ler a temperatura do sensor");
-    } else {
-      LOG_INF("%f", temperatura);
     }
   }
 }

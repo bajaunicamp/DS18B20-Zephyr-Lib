@@ -6,7 +6,14 @@
         "sim800l.h": "c",
         "kernel.h": "c",
         "uart.h": "c",
-        "ds18b20.h": "c"
+        "ds18b20.h": "c",
+        "*.tcc": "c",
+        "chrono": "c",
+        "cmath": "c",
+        "numeric": "c",
+        "ratio": "c",
+        "cinttypes": "c",
+        "cstdlib": "c"
     },
     "terminal.integrated.defaultProfile.linux": "Zephyr IDE Terminal",
     "cmake.configureOnOpen": false,

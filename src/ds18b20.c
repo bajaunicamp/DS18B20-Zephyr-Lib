@@ -4,21 +4,23 @@
 #include <zephyr/logging/log.h>
 #include <float.h>
 
-LOG_MODULE_DECLARE();
+LOG_MODULE_REGISTER(Temperatura);
 
 static const struct gpio_dt_spec *const w1 =
     &(const struct gpio_dt_spec)GPIO_DT_SPEC_GET(DT_PATH(zephyr_user), gpios);
 
-// Utiliza a contagem de ciclos do processador para criar delays de microssegundos
-static void delay_us(uint32_t tempo_microssegundos){
-  uint32_t val = k_cycle_get_32();
-  uint32_t current_time = val;
-  uint32_t tempo_cyc = k_us_to_cyc_floor32(tempo_microssegundos);
-  while ((val - current_time) < tempo_cyc) {
-    current_time = k_cycle_get_32();
-  }
+/**
+ * @brief Faz que o processador aguarde por tempo_us microssegundos.
+ */
+static void delay_us(uint32_t tempo_us){
+  k_busy_wait(tempo_us);
 }
 
+/**
+ * @brief Envia um sinal de presença para o sensor e verifica se há um sinal de resposta vindo do sensor.
+ * 
+ * @return 0, caso seja detectada uma resposta do sensor. -1, caso contrário.
+ */
 static uint8_t ds18b20_start(){
     if(!device_is_ready(w1->port)){
       LOG_ERR("O dispositivo não está pronto para ser usado.");
@@ -34,17 +36,23 @@ static uint8_t ds18b20_start(){
     gpio_pin_configure_dt(w1, GPIO_INPUT);
     delay_us(80);
 
-    if (!gpio_pin_get_dt(w1))
+    if (!gpio_pin_get_dt(w1)){
         ret = 0;
-    else
+    }
+    else{
         LOG_ERR("Não houve resposta de presença do sensor.");
         ret = -1;
+    }
 
     delay_us(400);
     return ret;
 }
 
-// Transmite um byte pelo protocolo de comunicação OneWire para o sensor.
+/**
+ * @brief Transmite um byte pelo barramento OneWire para o sensor.
+ * 
+ * @param data Byte a ser transmitido para o sensor.
+ */
 static void ds18b20_write(uint8_t data){
   gpio_pin_configure_dt(w1, GPIO_OUTPUT);
 
@@ -72,7 +80,12 @@ static void ds18b20_write(uint8_t data){
   }
 }
 
-// Lê um byte enviado pelo sensor através do protocolo OneWire.
+/**
+ * @brief Lê um byte enviado pelo sensor através do barramento OneWire. \n
+ * Note que cabe ao usuário dessa função garantir que há um byte relevante a ser lido no barramento OneWire.
+ * 
+ * @return Byte lido.
+ */
 static uint8_t ds18b20_read(){
   uint8_t value = 0;
   gpio_pin_configure_dt(w1, GPIO_INPUT);
@@ -104,5 +117,6 @@ float ds18b20_get_temperature(){
     temperature += ds18b20_read() << 8;
     temperature /= 16.0;
 
+    LOG_INF("%f", temperature);
     return temperature;
 }
