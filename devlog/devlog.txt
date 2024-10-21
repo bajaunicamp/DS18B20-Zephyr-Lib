@@ -1,0 +1,20 @@
+-------------------------------------18/10--------------------------------------
+Acabei o desenvolvimento dessa biblioteca. Então aqui vai uma revisão de o que eu
+aprendi no processo.
+
+No começo, eu gastei bastante tempo tentando entender e adaptar a bilioteca já
+existente no Zephyr para o sensor DS18B20. Aparentemente, aquela biblioteca é uma
+das únicas do Zephyr que é restrita a poucas placasm eu demorei pra perceber isso.
+
+Outro detalhe que eu não percebi inicialmente foi que era necessário colocar um resistor
+entre o VCC e o fio OneWire do sensor.
+
+Acho que os aprendizados que posso tirar disso são:
+1. Sempre ler atentamente o datasheet de um dispositivo novo, especialmente se for a 
+primeira vez que a equipe está usando aquele dispositivo. (Note que isso foi diferente
+do desenvolvimento da biblioteca do SIM800L, já que o Gian já havia usado e conseguiu
+me ensinar como usar).
+
+2. Às vezes, tentar adaptar o trabalho de outra pessoa pode ser mais difícil do que
+simplesmente fazer tudo do zero. Acho que eu deveria ter gasto menos tempo com a
+biblioteca do Zephyr.

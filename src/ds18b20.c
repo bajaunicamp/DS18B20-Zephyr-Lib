@@ -117,6 +117,6 @@ float ds18b20_get_temperature(){
     temperature += ds18b20_read() << 8;
     temperature /= 16.0;
 
-    LOG_INF("%f", temperature);
+
     return temperature;
 }

@@ -3,7 +3,7 @@
  * em graus Celsius e tem resolução de 0.0625.
  * 
  * @return Caso consiga obter a temperatura, retorna a temperatura lida. Caso
- * não consiga obter a leitura do sensor, retorna FLT_MIN (da lib float.h).
+ * não consiga obter a leitura do sensor, retorna FLT_MIN (da biblioteca float.h).
  */
 float ds18b20_get_temperature();
 

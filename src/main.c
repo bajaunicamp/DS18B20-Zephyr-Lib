@@ -1,6 +1,3 @@
-// Esse programa de expemplo printa "Hello World!" no LOG no momento em que o
-// led pisca
-
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
