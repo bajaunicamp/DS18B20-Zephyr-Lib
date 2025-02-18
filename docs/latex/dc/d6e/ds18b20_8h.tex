@@ -1,0 +1,40 @@
+\doxysection{Referência do Arquivo inc/ds18b20.h}
+\hypertarget{ds18b20_8h}{}\label{ds18b20_8h}\index{inc/ds18b20.h@{inc/ds18b20.h}}
+
+
+Biblioteca para comunicação com sensor de temperatura.  
+
+
+\doxysubsubsection*{Funções}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{ds18b20_8h_a873adb7a3f3910a07b085ce292e34db2}{ds18b20\+\_\+get\+\_\+temperature}} ()
+\begin{DoxyCompactList}\small\item\em Tenta obter a leitura de temperatura do sensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Descrição detalhada}
+Biblioteca para comunicação com sensor de temperatura. 
+
+Este arquivo contém as definições e funções necessárias para inicialiazar e ler dados do sensor de temperatura de acordo com as necessidades da equipe UNICAP Baja SAE
+
+\begin{DoxyAuthor}{Autor}
+Lucas Mendonça 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Funções}
+\Hypertarget{ds18b20_8h_a873adb7a3f3910a07b085ce292e34db2}\index{ds18b20.h@{ds18b20.h}!ds18b20\_get\_temperature@{ds18b20\_get\_temperature}}
+\index{ds18b20\_get\_temperature@{ds18b20\_get\_temperature}!ds18b20.h@{ds18b20.h}}
+\doxysubsubsection{\texorpdfstring{ds18b20\_get\_temperature()}{ds18b20\_get\_temperature()}}
+{\footnotesize\ttfamily \label{ds18b20_8h_a873adb7a3f3910a07b085ce292e34db2} 
+float ds18b20\+\_\+get\+\_\+temperature (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Tenta obter a leitura de temperatura do sensor. 
+
+A temperatura é lida em graus Celsius e tem resolução de 0.\+0625.
+
+\begin{DoxyReturn}{Retorna}
+Caso consiga obter a temperatura, retorna a temperatura lida. Caso não consiga obter a leitura do sensor, retorna FLT\+\_\+\+MIN (da biblioteca float.\+h). 
+\end{DoxyReturn}
